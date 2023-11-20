@@ -5,7 +5,6 @@ import cookieParser from 'cookie-parser';
 import { Server } from 'socket.io';
 
 import connectToDB from './config/db.js';
-import userRoutes from './routes/user.js';
 
 import logger from './middleware/logger.js';
 
@@ -29,7 +28,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // routes
-app.use(userRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
