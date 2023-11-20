@@ -2,9 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-import { Server } from 'socket.io';
 
 import connectToDB from './config/db.js';
+import initializeSocket from './socket/socket.js';
 
 import logger from './middleware/logger.js';
 
@@ -46,16 +46,4 @@ const server = app.listen(PORT, () => {
 });
 
 // socket io
-const io = new Server(server, {
-    cors: {
-        origin: 'http://localhost:5173'
-    }
-});
-
-io.on('connection', (socket) => {
-    console.log(`user connected ${socket.id}`);
-
-    socket.on('disconnect', () => {
-        console.log(`user disconnected ${socket.id}`);
-    });
-});
+initializeSocket(server);
